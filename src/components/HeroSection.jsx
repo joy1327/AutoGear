@@ -57,12 +57,12 @@ const HeroSection = () => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   }, [totalSlides]);
 
-  // Autoplay slideshow every 4.5s (pauses on mouse hover)
+  // Autoplay slideshow every 7.5s (relaxed pace for comfortable reading, pauses on hover)
   useEffect(() => {
     if (isPaused) return;
     timerRef.current = setInterval(() => {
       nextSlide();
-    }, 4500);
+    }, 7500);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -219,17 +219,27 @@ const HeroSection = () => {
 
       {/* Pagination Indicators / Dots */}
       <div className="hero-slider-dots" role="tablist" aria-label="Hero Carousel Dots">
-        {heroSlides.map((slide, idx) => (
-          <button
-            key={slide.id}
-            type="button"
-            role="tab"
-            aria-selected={idx === currentSlide}
-            aria-label={`Go to hero slide ${idx + 1}`}
-            className={`hero-slider-dot ${idx === currentSlide ? 'active' : ''}`}
-            onClick={() => setCurrentSlide(idx)}
-          />
-        ))}
+        {heroSlides.map((slide, idx) => {
+          const isActive = idx === currentSlide;
+          return (
+            <button
+              key={slide.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              aria-label={`Go to hero slide ${idx + 1}`}
+              className={`hero-slider-dot ${isActive ? 'active' : ''}`}
+              onClick={() => setCurrentSlide(idx)}
+            >
+              {isActive && (
+                <span 
+                  key={`progress-${idx}-${currentSlide}`} 
+                  className={`hero-dot-progress ${isPaused ? 'paused' : ''}`} 
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
     </section>
   );

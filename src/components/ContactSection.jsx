@@ -34,7 +34,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="section-padding" id="contact" style={{ backgroundColor: '#FFFFFF' }}>
+    <section className="section-padding" id="contact" style={{ backgroundColor: 'var(--color-bg-light)' }}>
       <div className="container">
         <div className="section-header">
           <span className="section-tag">
@@ -139,65 +139,84 @@ const ContactSection = () => {
             </div>
 
             {/* Service Callback / Inquiry Form */}
-            <div style={{ marginTop: '10px', paddingTop: '20px', borderTop: '1px solid var(--color-border)' }}>
-              <h4 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '12px' }}>
-                Request a Service Callback
-              </h4>
+            <div style={{ marginTop: '16px', paddingTop: '24px', borderTop: '1px solid var(--color-border)' }}>
+              <div style={{ marginBottom: '14px' }}>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '4px' }}>
+                  Request a Service Callback
+                </h4>
+                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)' }}>
+                  Enter your contact details and vehicle model. Our Anand technicians will call you back promptly.
+                </p>
+              </div>
 
               {submitted ? (
-                <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', padding: '16px', borderRadius: '8px', color: '#065F46', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <CheckCircle2 size={20} color="#10B981" />
+                <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', padding: '20px', borderRadius: '12px', color: '#065F46', display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <CheckCircle2 size={24} color="#10B981" style={{ flexShrink: 0 }} />
                   <div>
-                    <strong>Callback Request Received!</strong>
-                    <p style={{ fontSize: '0.85rem' }}>We will contact you on your phone number shortly during working hours.</p>
+                    <strong style={{ fontSize: '1rem', display: 'block', marginBottom: '2px' }}>Callback Request Received!</strong>
+                    <p style={{ fontSize: '0.88rem', margin: 0 }}>
+                      Thank you, {formData.name || 'valued customer'}. Our service advisor will call you at {formData.phone} during working hours.
+                    </p>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }} className="contact-input-grid">
-                    <input
-                      type="text"
-                      required
-                      placeholder="Your Name *"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      style={{ padding: '10px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '0.88rem' }}
-                    />
-                    <input
-                      type="tel"
-                      required
-                      placeholder="Phone Number *"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      style={{ padding: '10px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '0.88rem' }}
-                    />
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div className="form-row">
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Your Name *"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Phone Number *"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="form-control"
+                      />
+                    </div>
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }} className="contact-input-grid">
-                    <input
-                      type="text"
-                      placeholder="Car Model (e.g. Swift, Creta)"
-                      value={formData.carModel}
-                      onChange={(e) => setFormData({ ...formData, carModel: e.target.value })}
-                      style={{ padding: '10px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '0.88rem' }}
-                    />
-                    <select
-                      value={formData.serviceType}
-                      name="serviceType"
-                      onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                      style={{ padding: '10px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', fontSize: '0.88rem', background: '#FFFFFF' }}
-                    >
-                      <option value="Regular Car Services">Regular Car Services</option>
-                      <option value="Mechanical Repairs">Mechanical Repairs</option>
-                      <option value="Denting & Painting">Denting & Painting</option>
-                      <option value="AC Repair & Service">AC Repair & Service</option>
-                      <option value="Car Wash">Car Wash</option>
-                      <option value="Tyre & Wheel Services">Tyre & Wheel Services</option>
-                      <option value="Car Accessories">Car Accessories</option>
-                      <option value="Batteries / Clutch / Radiator">Batteries / Clutch / Radiator</option>
-                    </select>
+                  <div className="form-row">
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <input
+                        type="text"
+                        placeholder="Car Model (e.g. Swift, Creta)"
+                        value={formData.carModel}
+                        onChange={(e) => setFormData({ ...formData, carModel: e.target.value })}
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="form-group" style={{ margin: 0 }}>
+                      <select
+                        value={formData.serviceType}
+                        name="serviceType"
+                        onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
+                        className="form-select"
+                      >
+                        <option value="Regular Car Services">Regular Car Services</option>
+                        <option value="Mechanical Repairs">Mechanical Repairs</option>
+                        <option value="Denting & Painting">Denting & Painting</option>
+                        <option value="AC Repair & Service">AC Repair & Service</option>
+                        <option value="Car Wash">Car Wash</option>
+                        <option value="Tyre & Wheel Services">Tyre & Wheel Services</option>
+                        <option value="Car Accessories">Car Accessories</option>
+                        <option value="Batteries / Clutch / Radiator">Batteries / Clutch / Radiator</option>
+                      </select>
+                    </div>
                   </div>
-                  <button type="submit" className="btn btn-secondary btn-sm" style={{ alignSelf: 'flex-start', marginTop: '4px' }}>
-                    <Send size={15} /> Send Callback Request
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary" 
+                    style={{ alignSelf: 'flex-start', marginTop: '6px' }}
+                  >
+                    <Send size={16} /> Send Callback Request
                   </button>
                 </form>
               )}

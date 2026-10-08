@@ -92,6 +92,16 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/categories" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    Categories
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/why-choose-us" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    Why Us
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                     Contact
                   </NavLink>
@@ -182,6 +192,18 @@ const Navbar = () => {
               <li>
                 <Link to="/accessories" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                   <span>Accessories</span>
+                  <ChevronRight size={16} />
+                </Link>
+              </li>
+              <li>
+                <Link to="/categories" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+                  <span>All Categories</span>
+                  <ChevronRight size={16} />
+                </Link>
+              </li>
+              <li>
+                <Link to="/why-choose-us" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+                  <span>Why Choose Us</span>
                   <ChevronRight size={16} />
                 </Link>
               </li>

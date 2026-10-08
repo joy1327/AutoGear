@@ -23,13 +23,13 @@ const AccessoriesBannerSlider = ({ banners = accessoriesBanners }) => {
     setCurrentIndex(index);
   };
 
-  // Automatic slideshow (4.5s per slide), pauses on hover
+  // Automatic slideshow (7.5s per slide), pauses on hover
   useEffect(() => {
     if (isPaused || totalSlides <= 1) return;
 
     timerRef.current = setInterval(() => {
       nextSlide();
-    }, 4500);
+    }, 7500);
 
     return () => {
       if (timerRef.current) {

@@ -43,7 +43,7 @@ const trustCards = [
 
 const WhyChooseUsSection = () => {
   return (
-    <section className="section-padding" id="why-us" style={{ backgroundColor: 'var(--color-bg-light)' }}>
+    <section className="section-padding" id="why-us" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="container">
         <div className="section-header">
           <span className="section-tag">

@@ -5,6 +5,9 @@ import { categories } from '../data/categories';
 import ProductCard from '../components/ProductCard';
 import { Filter, SlidersHorizontal, Search, ArrowUpDown } from 'lucide-react';
 
+import PageBanner from '../components/PageBanner';
+import CallToActionBanner from '../components/CallToActionBanner';
+
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get('category') || 'all';
@@ -57,17 +60,21 @@ const Products = () => {
   }, [selectedCategory, filterParam, localSearch, priceMax, sortBy]);
 
   return (
-    <div className="section-padding" style={{ backgroundColor: '#F8F9FA' }}>
-      <div className="container">
-        {/* Page Header */}
-        <div style={{ marginBottom: '36px' }}>
-          <h1 style={{ fontSize: '2.4rem', fontWeight: 800, marginBottom: '8px' }}>
-            Automotive Accessories Catalog
-          </h1>
-          <p style={{ color: 'var(--color-text-muted)' }}>
-            Showing {filteredProducts.length} high-grade performance accessories and parts
-          </p>
-        </div>
+    <div className="products-page">
+      {/* Standardized Page Banner */}
+      <PageBanner 
+        tag="Verified Automotive Parts"
+        title="Automotive Accessories & Parts Catalog"
+        subtitle={`Showing ${filteredProducts.length} verified products, spares, and comfort styling accessories available in Anand.`}
+        breadcrumbs={[
+          { label: 'Accessories', path: '/accessories' },
+          { label: 'Catalog' }
+        ]}
+        showActions={true}
+      />
+
+      <section className="section-padding" style={{ backgroundColor: '#F8F9FA' }}>
+        <div className="container">
 
         {/* Filter & Search Bar Toolbar */}
         <div 
@@ -179,33 +186,33 @@ const Products = () => {
             ))}
           </div>
         ) : (
-          <div 
-            style={{ 
-              textAlign: 'center', 
-              padding: '80px 20px', 
-              background: '#FFFFFF', 
-              borderRadius: '16px',
-              border: '1px dashed var(--color-border)' 
-            }}
-          >
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '8px' }}>No matching accessories found</h3>
-            <p style={{ color: 'var(--color-text-muted)', marginBottom: '20px' }}>
-              Try adjusting your search criteria or clear your category filter.
-            </p>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => {
-                setSelectedCategory('all');
-                setLocalSearch('');
-                setSearchParams({});
-              }}
-            >
-              Reset Filters
-            </button>
-          </div>
-        )}
-      </div>
+          <div className="empty-state">
+              <h3 className="empty-state-title">No matching accessories found</h3>
+              <p className="empty-state-desc">
+                Try adjusting your search criteria, price range, or clear your category filter.
+              </p>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => {
+                  setSelectedCategory('all');
+                  setLocalSearch('');
+                  setSearchParams({});
+                }}
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Standardized Bottom Inquiries Banner */}
+      <CallToActionBanner 
+        tag="Availability & Fitment Check"
+        title="Need Advice on Accessory Compatibility?"
+        subtitle="Call our team with your car model name or visit our Anand workshop to inspect materials and finish in person."
+      />
     </div>
   );
 };

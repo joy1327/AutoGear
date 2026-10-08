@@ -22,7 +22,7 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="section-padding" id="about" style={{ backgroundColor: '#FFFFFF' }}>
+    <section className="section-padding" id="about" style={{ backgroundColor: 'var(--color-bg-light)' }}>
       <div className="container">
         <div className="about-layout-grid">
           {/* Content Column */}

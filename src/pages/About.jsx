@@ -1,41 +1,58 @@
 import React from 'react';
 import { businessInfo } from '../data/businessInfo';
-import { Wrench, MapPin, Phone, ShieldCheck, HeartHandshake, CheckCircle2, Navigation } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import PageBanner from '../components/PageBanner';
+import CallToActionBanner from '../components/CallToActionBanner';
+import { Wrench, ShieldCheck, HeartHandshake, CheckCircle2, Navigation, Phone, Award, Users, Clock } from 'lucide-react';
 
 const About = () => {
   return (
-    <div style={{ backgroundColor: '#FFFFFF' }}>
-      {/* Header Banner */}
-      <div style={{ background: 'linear-gradient(135deg, #111111 0%, #1e242b 100%)', color: '#FFFFFF', padding: '64px 0', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <div className="logo-badge" style={{ margin: '0 auto 18px auto', width: '50px', height: '50px' }}>
-            <Wrench size={26} />
-          </div>
-          <h1 style={{ fontSize: '2.8rem', fontWeight: 800, marginBottom: '14px', color: '#FFFFFF' }}>
-            About Saini Car World
-          </h1>
-          <p style={{ fontSize: '1.15rem', color: '#D1D5DB', lineHeight: 1.6 }}>
-            Reliable car servicing, mechanical repairs, denting & painting, and premium automotive accessories under one roof in Anand, Gujarat.
-          </p>
-        </div>
-      </div>
+    <div className="about-page">
+      {/* Standardized Page Banner */}
+      <PageBanner 
+        tag="Trusted Anand Workshop"
+        tagIcon={ShieldCheck}
+        title="About Saini Car World"
+        subtitle="Reliable car servicing, mechanical repairs, denting & painting, and premium automotive accessories under one roof in Anand, Gujarat."
+        breadcrumbs={[{ label: 'About Us' }]}
+        showActions={true}
+      />
 
       {/* Overview Section */}
-      <div className="section-padding">
+      <section className="section-padding" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '48px', alignItems: 'center' }} className="about-grid">
-            <div>
-              <span className="section-tag">Who We Are</span>
-              <h2 style={{ fontSize: '2.2rem', fontWeight: 800, marginBottom: '18px' }}>
+          <div className="about-layout-grid">
+            <div className="about-content-col">
+              <span className="section-tag">
+                <ShieldCheck size={14} /> Who We Are
+              </span>
+              <h2 className="section-title text-left" style={{ marginBottom: '18px' }}>
                 Your Trusted Automotive Partner in Anand
               </h2>
-              <p style={{ color: '#4B5563', lineHeight: 1.7, marginBottom: '16px' }}>
-                At <strong>Saini Car World</strong>, we provide a complete spectrum of automotive services, maintenance, mechanical repairs, bodywork, and genuine car accessories. Rather than visiting different shops for servicing, electrical fittings, denting, tyres, and interior accessories, our workshop brings every solution together under one roof.
+              <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: '16px', fontSize: '1.02rem' }}>
+                At <strong>Saini Car World</strong>, we provide a complete spectrum of automotive services, periodic maintenance, mechanical repairs, precision bodywork, and genuine car accessories. Rather than visiting different shops across town for servicing, electrical fittings, denting, tyres, and interior accessories, our workshop brings every solution together under one roof.
               </p>
-              <p style={{ color: '#4B5563', lineHeight: 1.7, marginBottom: '24px' }}>
+              <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: '28px', fontSize: '0.98rem' }}>
                 Conveniently located at Municipal Shopping Center, Near Indira Gandhi Statue on Lambhavel Road, we cater to car owners across Anand, Vidyanagar, Karamsad, and surrounding regions with honest diagnostic evaluation and skilled mechanical workmanship.
               </p>
+
+              {/* Trust Metric Badges */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px', marginBottom: '32px' }}>
+                <div style={{ background: 'var(--color-bg-light)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', textAlign: 'center' }}>
+                  <Award size={22} color="var(--color-accent)" style={{ margin: '0 auto 6px auto' }} />
+                  <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--color-primary)' }}>100%</strong>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>Genuine Parts</span>
+                </div>
+                <div style={{ background: 'var(--color-bg-light)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', textAlign: 'center' }}>
+                  <Users size={22} color="var(--color-accent)" style={{ margin: '0 auto 6px auto' }} />
+                  <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--color-primary)' }}>Thousands</strong>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>Happy Drivers</span>
+                </div>
+                <div style={{ background: 'var(--color-bg-light)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', textAlign: 'center' }}>
+                  <Clock size={22} color="var(--color-accent)" style={{ margin: '0 auto 6px auto' }} />
+                  <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--color-primary)' }}>6 Days/Wk</strong>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>9:30AM - 7PM</span>
+                </div>
+              </div>
 
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <a 
@@ -55,25 +72,29 @@ const About = () => {
               </div>
             </div>
 
-            <div>
-              <img 
-                src="/images/workshop-hero.jpg" 
-                alt="Saini Car World Service Workshop" 
-                style={{ borderRadius: '16px', boxShadow: 'var(--shadow-xl)', width: '100%', height: '380px', objectFit: 'cover' }}
-              />
+            <div className="about-visual-col">
+              <div className="about-image-card">
+                <img 
+                  src="/images/workshop-hero.jpg" 
+                  alt="Saini Car World Service Workshop Anand" 
+                  className="about-main-image"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Workshop Principles */}
-      <div className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
+      <section className="section-padding" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="container">
           <div className="section-header">
-            <span className="section-tag">Our Approach</span>
-            <h2 className="section-title">What Sets Us Apart</h2>
+            <span className="section-tag">
+              <ShieldCheck size={14} /> Our Approach
+            </span>
+            <h2 className="section-title">What Sets Saini Car World Apart</h2>
             <p className="section-description">
-              Our business is built on approachable service, practical solutions, and quality automotive care.
+              Our business is built on approachable service, practical solutions, and quality automotive care you can trust.
             </p>
           </div>
 
@@ -103,16 +124,14 @@ const About = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <style>{`
-        @media (max-width: 800px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-            gap: 32px !important;
-          }
-        }
-      `}</style>
+      {/* Unified Bottom Inquiries Banner */}
+      <CallToActionBanner 
+        tag="Visit Saini Car World"
+        title="Looking for Honest Automotive Guidance in Anand?"
+        subtitle="Drive to our center near Indira Gandhi Statue, Lambhavel Road or call our technical team directly for friendly service."
+      />
     </div>
   );
 };
