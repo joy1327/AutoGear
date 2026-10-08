@@ -3,10 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const CategoryCard = ({ category }) => {
-  const targetRoute = category.route || `/products?category=${category.slug}`;
+  // Temporarily disabled: routing to catalog on Explorer click per request
+  // const targetRoute = category.route || `/products?category=${category.slug}`;
 
   return (
-    <Link to={targetRoute} className="category-card" title={category.name}>
+    <div 
+      className="category-card" 
+      title={category.name}
+      style={{ cursor: 'pointer' }}
+      onClick={(e) => {
+        // Navigation temporarily disabled
+        e.preventDefault();
+      }}
+    >
       <div className="category-img-wrap">
         <img 
           src={category.image} 
@@ -27,11 +36,11 @@ const CategoryCard = ({ category }) => {
         {category.description && (
           <p className="category-desc">{category.description}</p>
         )}
-        <span className="category-action-link">
+        <span className="category-action-link" style={{ pointerEvents: 'none' }}>
           Explore <ArrowRight size={14} />
         </span>
       </div>
-    </Link>
+    </div>
   );
 };
 

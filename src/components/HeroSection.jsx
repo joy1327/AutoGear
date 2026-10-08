@@ -138,22 +138,22 @@ const HeroSection = () => {
 
       {/* Hero Content Container */}
       <div className="container" style={{ position: 'relative', zIndex: 3 }}>
-        <div className="hero-content">
-          <div className="hero-tag-badge">
+        <div className="hero-content" key={currentSlide}>
+          <div className="hero-tag-badge animate-hero-tag">
             <TagIconComponent size={14} />
             <span>{currentData.tag}</span>
           </div>
 
           <h1 
-            className="hero-headline"
+            className="hero-headline animate-hero-title"
             dangerouslySetInnerHTML={{ __html: currentData.headline }}
           />
 
-          <p className="hero-subheading">
+          <p className="hero-subheading animate-hero-desc">
             {currentData.subheading}
           </p>
 
-          <div className="hero-buttons">
+          <div className="hero-buttons animate-hero-buttons">
             {/* Primary Action */}
             <a 
               href={currentData.primaryBtn.href} 

@@ -38,11 +38,70 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Global scroll reveal observer for smooth entrance animations
+const ScrollRevealObserver = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll(
+        '.reveal-on-scroll, .section-header, .feature-card, .category-card, .service-card, .offering-card, .why-us-card, .contact-card, .review-card, .product-card'
+      ).forEach(el => el.classList.add('is-revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08
+      }
+    );
+
+    const observeElements = () => {
+      const targets = document.querySelectorAll(
+        '.reveal-on-scroll, .section-header, .feature-card, .category-card, .service-card, .offering-card, .why-us-card, .contact-card, .review-card, .product-card'
+      );
+      targets.forEach((target) => {
+        if (!target.classList.contains('is-revealed')) {
+          observer.observe(target);
+        }
+      });
+    };
+
+    const timer = setTimeout(observeElements, 50);
+
+    const mutationObserver = new MutationObserver(() => {
+      observeElements();
+    });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   return (
     <ShopProvider>
       <Router>
         <ScrollToTop />
+        <ScrollRevealObserver />
         <div className="site-wrapper">
           <Navbar />
           <main className="main-content">
@@ -56,6 +115,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="*" element={<Home />} />

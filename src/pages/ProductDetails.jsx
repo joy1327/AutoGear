@@ -23,7 +23,9 @@ const ProductDetails = () => {
   const { addToCart, toggleWishlist, isInWishlist, showToast } = useShop();
 
   const isWishlisted = isInWishlist(product.id);
-  const relatedProducts = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 4);
+  const relatedProducts = products
+    .filter(p => p.id !== product.id && (p.category === product.category || p.group === product.group))
+    .slice(0, 4);
 
   const handleShare = () => {
     navigator.clipboard?.writeText(window.location.href);
