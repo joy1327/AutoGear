@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
-import { categories } from '../data/categories';
-import { businessInfo } from '../data/businessInfo';
-import { Shield, ArrowRight, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { categories, categoryTabs } from '../data/categories';
+import CategoryCard from './CategoryCard';
+import { Shield } from 'lucide-react';
 
 const AccessoriesSection = () => {
   const [activeTab, setActiveTab] = useState('all');
 
   const filteredCategories = categories.filter((cat) => {
     if (activeTab === 'all') return true;
-    if (activeTab === 'accessories') return cat.type === 'accessories';
-    if (activeTab === 'parts') return cat.type === 'parts';
-    if (activeTab === 'audio') return cat.type === 'audio-electronics';
-    if (activeTab === 'care') return cat.type === 'care';
-    return true;
+    if (Array.isArray(cat.group)) return cat.group.includes(activeTab);
+    return cat.group === activeTab;
   });
 
   return (
@@ -23,85 +19,52 @@ const AccessoriesSection = () => {
           <span className="section-tag">
             <Shield size={14} /> Genuine Upgrades & Replacement Parts
           </span>
-          <h2 className="section-title">Car Accessories & Parts Range</h2>
+          <h2 className="section-title">Car Accessories & Parts Catalog</h2>
           <p className="section-description">
             Explore authentic automotive accessories and mechanical components available in stock at Saini Car World, Anand.
           </p>
         </div>
 
-        {/* Category Filter Pills */}
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '36px' }}>
-          <button
-            type="button"
-            className={`btn btn-sm ${activeTab === 'all' ? 'btn-primary' : 'btn-outline-dark'}`}
-            onClick={() => setActiveTab('all')}
-          >
-            All Categories ({categories.length})
-          </button>
-          <button
-            type="button"
-            className={`btn btn-sm ${activeTab === 'accessories' ? 'btn-primary' : 'btn-outline-dark'}`}
-            onClick={() => setActiveTab('accessories')}
-          >
-            Interior & Exterior Accessories
-          </button>
-          <button
-            type="button"
-            className={`btn btn-sm ${activeTab === 'parts' ? 'btn-primary' : 'btn-outline-dark'}`}
-            onClick={() => setActiveTab('parts')}
-          >
-            Mechanical & Electrical Parts
-          </button>
-          <button
-            type="button"
-            className={`btn btn-sm ${activeTab === 'audio' ? 'btn-primary' : 'btn-outline-dark'}`}
-            onClick={() => setActiveTab('audio')}
-          >
-            Audio & Stereo Systems
-          </button>
-          <button
-            type="button"
-            className={`btn btn-sm ${activeTab === 'care' ? 'btn-primary' : 'btn-outline-dark'}`}
-            onClick={() => setActiveTab('care')}
-          >
-            Car Care & Detailing
-          </button>
+        {/* Dynamic Category Filter Tabs (Inspired by Carhatke) */}
+        <div 
+          style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            flexWrap: 'wrap', 
+            gap: '10px', 
+            marginBottom: '36px' 
+          }}
+        >
+          {categoryTabs.map((tab) => {
+            const count = tab.id === 'all' 
+              ? categories.length 
+              : categories.filter((c) => Array.isArray(c.group) ? c.group.includes(tab.id) : c.group === tab.id).length;
+
+            if (count === 0 && tab.id !== 'all') return null;
+
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                className={`btn btn-sm ${activeTab === tab.id ? 'btn-primary' : 'btn-outline-dark'}`}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  transition: 'all 0.2s ease',
+                  padding: '8px 18px',
+                  borderRadius: '24px',
+                  fontSize: '0.88rem'
+                }}
+              >
+                {tab.name} ({count})
+              </button>
+            );
+          })}
         </div>
 
-        {/* Category Cards Grid */}
+        {/* Reusable Category Cards Grid */}
         <div className="category-grid">
           {filteredCategories.map((cat) => (
-            <div key={cat.id} className="category-card">
-              <div className="category-img-wrap">
-                <img 
-                  src={cat.image} 
-                  alt={cat.name} 
-                  className="category-img"
-                  loading="lazy" 
-                />
-                <span className="category-badge-chip">{cat.badge}</span>
-              </div>
-
-              <div className="category-info">
-                <h3 className="category-name">{cat.name}</h3>
-                <p className="category-desc">{cat.description}</p>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid #F1F5F9' }}>
-                  <a 
-                    href={`tel:${businessInfo.phoneRaw}`} 
-                    style={{ fontSize: '0.85rem', fontWeight: 700, color: '#10B981', display: 'flex', alignItems: 'center', gap: '4px' }}
-                    title={`Inquire about ${cat.name}`}
-                  >
-                    <Phone size={14} /> Inquire
-                  </a>
-                  <Link 
-                    to="/contact" 
-                    className="category-action-link"
-                  >
-                    Details <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <CategoryCard key={cat.id} category={cat} />
           ))}
         </div>
       </div>

@@ -7,7 +7,7 @@ import { Shield, Phone, Navigation } from 'lucide-react';
 const AccessoriesPage = () => {
   return (
     <div style={{ backgroundColor: '#FFFFFF' }}>
-      <div style={{ background: 'linear-gradient(135deg, #111111 0%, #1a2026 100%)', color: '#FFFFFF', padding: '60px 0', textAlign: 'center' }}>
+      <div style={{ background: 'linear-gradient(135deg, #111111 0%, #1a2026 100%)', color: '#FFFFFF', padding: '50px 0 40px 0', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '780px' }}>
           <span className="section-tag" style={{ backgroundColor: 'rgba(230, 57, 70, 0.2)', color: '#FFA5AD' }}>
             <Shield size={14} /> Genuine Automotive Stock

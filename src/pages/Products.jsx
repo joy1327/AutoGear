@@ -84,8 +84,38 @@ const Products = () => {
             gap: '16px'
           }}
         >
-          {/* Category Quick Pills */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
+          {/* Category Dropdown and Quick Filter Tabs */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+            <select
+              value={selectedCategory}
+              onChange={(e) => {
+                setSelectedCategory(e.target.value);
+                if (e.target.value === 'all') {
+                  setSearchParams({});
+                } else {
+                  setSearchParams({ category: e.target.value });
+                }
+              }}
+              style={{
+                padding: '8px 14px',
+                borderRadius: '8px',
+                border: '1px solid var(--color-border)',
+                fontFamily: 'inherit',
+                fontSize: '0.9rem',
+                background: '#FFFFFF',
+                cursor: 'pointer',
+                fontWeight: 600,
+                color: 'var(--color-primary)'
+              }}
+            >
+              <option value="all">All Categories ({categories.length})</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.slug}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+
             <button
               type="button"
               className={`btn btn-sm ${selectedCategory === 'all' ? 'btn-secondary' : 'btn-outline-dark'}`}
@@ -94,21 +124,8 @@ const Products = () => {
                 setSearchParams({});
               }}
             >
-              All Categories
+              All
             </button>
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                className={`btn btn-sm ${selectedCategory === cat.slug ? 'btn-primary' : 'btn-outline-dark'}`}
-                onClick={() => {
-                  setSelectedCategory(cat.slug);
-                  setSearchParams({ category: cat.slug });
-                }}
-              >
-                {cat.name}
-              </button>
-            ))}
           </div>
 
           {/* Sort & Search Controls */}
