@@ -1,0 +1,13 @@
+# Robots.txt for Saini Car World
+# Website: https://sainicarworld.com/
+
+User-agent: *
+Allow: /
+
+# Disallow private user utility routes to conserve crawl budget
+Disallow: /cart
+Disallow: /wishlist
+
+# Sitemap location
+Sitemap: https://sainicarworld.com/sitemap.xml
+Host: https://sainicarworld.com
