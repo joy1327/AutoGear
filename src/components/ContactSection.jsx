@@ -128,13 +128,14 @@ const ContactSection = () => {
               </a>
 
               <a 
-                href={businessInfo.googleMapsUrl} 
+                href={businessInfo.googleMapsNavigationUrl} 
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn btn-primary btn-lg"
                 style={{ flex: 1, minWidth: '150px' }}
+                title="Start Turn-by-Turn GPS Navigation"
               >
-                <Navigation size={18} /> Get Directions
+                <Navigation size={18} /> Start GPS Directions
               </a>
             </div>
 

@@ -59,7 +59,6 @@ const Footer = () => {
               <li><Link to="/about">About Us</Link></li>
               <li><Link to="/services">Car Services</Link></li>
               <li><Link to="/accessories">Car Accessories</Link></li>
-              <li><Link to="/categories">All Categories</Link></li>
               <li><Link to="/why-choose-us">Why Choose Us</Link></li>
               <li><Link to="/contact">Contact Us</Link></li>
             </ul>

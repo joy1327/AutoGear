@@ -21,13 +21,13 @@ const FloatingMobileBar = () => {
           <span>Call Now</span>
         </a>
 
-        {/* Button 2: Directions in Google Maps */}
+        {/* Button 2: Instant Turn-by-Turn GPS Navigation in Google Maps */}
         <a 
-          href={businessInfo.googleMapsUrl} 
+          href={businessInfo.googleMapsNavigationUrl} 
           target="_blank" 
           rel="noreferrer" 
           className="floating-action-btn btn-directions"
-          aria-label="Get directions to workshop"
+          aria-label="Start GPS directions to workshop"
         >
           <Navigation size={18} />
           <span>Directions</span>

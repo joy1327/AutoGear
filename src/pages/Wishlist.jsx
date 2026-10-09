@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { useShop } from '../context/ShopContext';
 import { products } from '../data/products';
 import { Heart, Trash2, ShoppingBag, ArrowRight, ChevronRight } from 'lucide-react';
@@ -12,6 +13,7 @@ const Wishlist = () => {
   if (wishlistedProducts.length === 0) {
     return (
       <div className="section-padding" style={{ backgroundColor: '#F8F9FA', textAlign: 'center' }}>
+        <SEO title="Saved Wishlist" noindex={true} />
         <div className="container" style={{ maxWidth: '580px', background: '#FFFFFF', padding: '60px 30px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
           <Heart size={64} color="#D1D5DB" style={{ margin: '0 auto 20px auto' }} />
           <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '10px' }}>Your Wishlist is Empty</h2>
@@ -28,6 +30,7 @@ const Wishlist = () => {
 
   return (
     <div style={{ backgroundColor: '#F8F9FA', padding: '40px 0 80px 0' }}>
+      <SEO title="Saved Wishlist" noindex={true} />
       <div className="container">
         {/* Breadcrumb */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', color: '#666', marginBottom: '24px' }}>

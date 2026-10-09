@@ -39,10 +39,8 @@ const heroSlides = [
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const touchStartXRef = useRef(0);
   const touchEndXRef = useRef(0);
-  const timerRef = useRef(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,18 +54,6 @@ const HeroSection = () => {
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   }, [totalSlides]);
-
-  // Autoplay slideshow every 7.5s (relaxed pace for comfortable reading, pauses on hover)
-  useEffect(() => {
-    if (isPaused) return;
-    timerRef.current = setInterval(() => {
-      nextSlide();
-    }, 7500);
-
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [isPaused, nextSlide, currentSlide]);
 
   // Touch swipe support for mobile
   const handleTouchStart = (e) => {
@@ -108,8 +94,6 @@ const HeroSection = () => {
   return (
     <section 
       className="hero-section"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -230,14 +214,7 @@ const HeroSection = () => {
               aria-label={`Go to hero slide ${idx + 1}`}
               className={`hero-slider-dot ${isActive ? 'active' : ''}`}
               onClick={() => setCurrentSlide(idx)}
-            >
-              {isActive && (
-                <span 
-                  key={`progress-${idx}-${currentSlide}`} 
-                  className={`hero-dot-progress ${isPaused ? 'paused' : ''}`} 
-                />
-              )}
-            </button>
+            />
           );
         })}
       </div>

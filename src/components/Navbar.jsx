@@ -92,11 +92,6 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/categories" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                    Categories
-                  </NavLink>
-                </li>
-                <li>
                   <NavLink to="/why-choose-us" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                     Why Us
                   </NavLink>
@@ -196,12 +191,6 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/categories" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
-                  <span>All Categories</span>
-                  <ChevronRight size={16} />
-                </Link>
-              </li>
-              <li>
                 <Link to="/why-choose-us" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                   <span>Why Choose Us</span>
                   <ChevronRight size={16} />
@@ -215,12 +204,11 @@ const Navbar = () => {
               </li>
             </ul>
 
-            <div className="mobile-drawer-footer">
+            <div className="mobile-drawer-footer nav-drawer-footer">
               <button 
                 type="button"
                 onClick={onCallNowClick}
-                className="btn btn-call" 
-                style={{ width: '100%', marginBottom: '10px' }}
+                className="btn btn-call mobile-cta-btn"
               >
                 <Phone size={17} /> Call Now
               </button>
@@ -228,8 +216,7 @@ const Navbar = () => {
                 href={businessInfo.googleMapsUrl} 
                 target="_blank" 
                 rel="noreferrer" 
-                className="btn btn-outline-dark btn-sm"
-                style={{ width: '100%' }}
+                className="btn btn-outline-dark mobile-cta-btn"
               >
                 <Navigation size={16} /> Get Directions
               </a>

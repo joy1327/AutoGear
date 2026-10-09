@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { getProductById, products } from '../data/products';
 import { useShop } from '../context/ShopContext';
 import { 
@@ -34,6 +35,54 @@ const ProductDetails = () => {
 
   return (
     <div style={{ backgroundColor: '#F8F9FA', padding: '40px 0 80px 0' }}>
+      <SEO 
+        title={`${product.name} | Saini Car World Anand`}
+        description={product.shortDescription || `Buy genuine ${product.name} with warranty and fitment in Anand, Gujarat at Saini Car World.`}
+        keywords={`${product.name}, ${product.categoryName}, Car accessories Anand, Buy car parts Gujarat`}
+        canonicalUrl={`https://sainicarworld.com/products/${product.id}`}
+        image={product.image}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sainicarworld.com/" },
+                { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://sainicarworld.com/products" },
+                { "@type": "ListItem", "position": 3, "name": product.categoryName, "item": `https://sainicarworld.com/products?category=${product.category}` },
+                { "@type": "ListItem", "position": 4, "name": product.name, "item": `https://sainicarworld.com/products/${product.id}` }
+              ]
+            },
+            {
+              "@type": "Product",
+              "name": product.name,
+              "image": product.image.startsWith('http') ? product.image : `https://sainicarworld.com${product.image}`,
+              "description": product.shortDescription,
+              "sku": product.id,
+              "brand": {
+                "@type": "Brand",
+                "name": "Saini Car World"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": `https://sainicarworld.com/products/${product.id}`,
+                "priceCurrency": "INR",
+                "price": product.price,
+                "availability": "https://schema.org/InStock",
+                "seller": {
+                  "@type": "AutoPartsStore",
+                  "name": "Saini Car World"
+                }
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": product.rating,
+                "reviewCount": product.reviewsCount || 10
+              }
+            }
+          ]
+        }}
+      />
       <div className="container">
         {/* Breadcrumb */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', color: '#666', marginBottom: '28px' }}>

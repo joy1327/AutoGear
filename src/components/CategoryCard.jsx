@@ -1,11 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const CategoryCard = ({ category }) => {
-  // Temporarily disabled: routing to catalog on Explorer click per request
-  // const targetRoute = category.route || `/products?category=${category.slug}`;
-
   return (
     <div 
       className="category-card" 
@@ -16,6 +12,18 @@ const CategoryCard = ({ category }) => {
         e.preventDefault();
       }}
     >
+      {/* Dedicated top bar for feature/highlight badge - prevents covering the product image */}
+      <div className="category-card-topbar">
+        {category.badge ? (
+          <span className="category-badge-chip" title={category.badge}>
+            {category.badge}
+          </span>
+        ) : (
+          <span className="category-badge-placeholder" aria-hidden="true" />
+        )}
+      </div>
+
+      {/* Completely unobstructed product image area */}
       <div className="category-img-wrap">
         <img 
           src={category.image} 
@@ -27,10 +35,8 @@ const CategoryCard = ({ category }) => {
             e.currentTarget.src = '/images/interior-accessories.jpg';
           }}
         />
-        {category.badge && (
-          <span className="category-badge-chip">{category.badge}</span>
-        )}
       </div>
+
       <div className="category-info">
         <h3 className="category-name">{category.name}</h3>
         {category.description && (

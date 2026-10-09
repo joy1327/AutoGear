@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 import { accessoriesBanners } from '../data/accessoriesBanners';
 
-const AccessoriesBannerSlider = ({ banners = accessoriesBanners }) => {
+const AccessoriesBannerSlider = ({ banners = accessoriesBanners, autoPlay = false }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartXRef = useRef(0);
@@ -23,9 +23,9 @@ const AccessoriesBannerSlider = ({ banners = accessoriesBanners }) => {
     setCurrentIndex(index);
   };
 
-  // Automatic slideshow (7.5s per slide), pauses on hover
+  // Optional automatic slideshow, disabled by default
   useEffect(() => {
-    if (isPaused || totalSlides <= 1) return;
+    if (!autoPlay || isPaused || totalSlides <= 1) return;
 
     timerRef.current = setInterval(() => {
       nextSlide();

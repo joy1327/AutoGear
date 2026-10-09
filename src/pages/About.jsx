@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../components/SEO';
 import { businessInfo } from '../data/businessInfo';
 import PageBanner from '../components/PageBanner';
 import CallToActionBanner from '../components/CallToActionBanner';
@@ -7,6 +8,20 @@ import { Wrench, ShieldCheck, HeartHandshake, CheckCircle2, Navigation, Phone, A
 const About = () => {
   return (
     <div className="about-page">
+      <SEO 
+        title="About Us | Saini Car World Anand Gujarat"
+        description="Learn about Saini Car World, Anand's premier automotive workshop providing multi-brand car repairs, periodic servicing, paint booth work, and genuine accessories."
+        keywords="About Saini Car World, Car workshop in Anand, Car mechanic Anand, Best car service center Anand Gujarat"
+        canonicalUrl="https://sainicarworld.com/about"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sainicarworld.com/" },
+            { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://sainicarworld.com/about" }
+          ]
+        }}
+      />
       {/* Standardized Page Banner */}
       <PageBanner 
         tag="Trusted Anand Workshop"

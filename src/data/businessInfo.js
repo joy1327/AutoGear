@@ -15,5 +15,8 @@ export const businessInfo = {
     { days: "Sunday", time: "Closed", isOpen: false }
   ],
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Saini+Car+World+Municipal+Shopping+Center+Near+Indira+Gandhi+Statue+Lambhavel+Road+Anand+Gujarat+388001",
+  googleMapsNavigationUrl: "https://www.google.com/maps/dir/?api=1&destination=22.5645,72.9558",
+  whatsappNumber: "919537521273",
+  whatsappUrl: "https://wa.me/919537521273",
   embedMapUrl: "https://maps.google.com/maps?q=Municipal%20Shopping%20Center%20Lambhavel%20Road%20Anand%20Gujarat%20388001&t=&z=16&ie=UTF8&iwloc=&output=embed"
 };

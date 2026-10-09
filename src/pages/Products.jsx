@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { products } from '../data/products';
 import { categories, categoryTabs } from '../data/categories';
 import { businessInfo } from '../data/businessInfo';
@@ -205,6 +206,20 @@ const Products = () => {
 
   return (
     <div className="products-page">
+      <SEO 
+        title={`${bannerTitle} | Saini Car World Anand`}
+        description={bannerSubtitle}
+        keywords="Car parts Anand, Car accessories shop Gujarat, Automotive components Anand, Saini Car World products"
+        canonicalUrl="https://sainicarworld.com/products"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sainicarworld.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://sainicarworld.com/products" }
+          ]
+        }}
+      />
       {/* Standardized Header Banner */}
       <PageBanner 
         tag={activeCategoryMeta ? "Genuine Stock" : "Verified Automotive Parts"}
@@ -759,7 +774,7 @@ const Products = () => {
               </div>
             </div>
 
-            <div className="mobile-drawer-footer">
+            <div className="filter-drawer-footer">
               <button
                 type="button"
                 className="btn btn-outline-dark"

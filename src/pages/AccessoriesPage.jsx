@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../components/SEO';
 import AccessoriesSection from '../components/AccessoriesSection';
 import AdditionalOfferingsSection from '../components/AdditionalOfferingsSection';
 import PageBanner from '../components/PageBanner';
@@ -8,6 +9,20 @@ import { Shield } from 'lucide-react';
 const AccessoriesPage = () => {
   return (
     <div className="accessories-page">
+      <SEO 
+        title="Car Accessories & Genuine Spare Parts Store in Anand | Saini Car World"
+        description="Premium car interior styling, exterior aerodynamic kits, LED lighting, seat covers, Android touchscreen audio, and genuine car spares in Anand, Gujarat."
+        keywords="Car accessories Anand, Car accessories shop Anand, Car seat covers Anand, Car lights Anand, Android car stereo Anand Gujarat, Saini Car World accessories"
+        canonicalUrl="https://sainicarworld.com/accessories"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sainicarworld.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Accessories", "item": "https://sainicarworld.com/accessories" }
+          ]
+        }}
+      />
       {/* Standardized Page Banner */}
       <PageBanner 
         tag="Genuine Automotive Stock"
